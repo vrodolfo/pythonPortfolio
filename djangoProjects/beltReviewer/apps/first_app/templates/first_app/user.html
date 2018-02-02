@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Beltreviewer</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+	<input type="hidden" name="user_checked" value="">
+	<div class="header">
+		<a href="/books">Home</a>
+		<a href="/books/add">Add Book and Review</a>
+		<a href="/goback">Logout</a>
+	</div>
+	<div class="">
+		user checked id: {{user.id}}
+		<h2>User Alias:{{user.last_name}}</h2>
+		<h2>Name: {{user.first_name}}</h2>
+		<h2>Email:{{user.email_address}} </h2>
+		<h2>Total Reviews: {{reviews_count}}</h2>
+	</div>
+
+	<div>
+		<h2>Posted Reviews on the following books:</h2>
+		{% for i in books %}
+			<h3><a href="/books/{{i.id}}">{{i.title}}</a></h3>
+		{% endfor %}
+	</div>
+</body>
+</html>

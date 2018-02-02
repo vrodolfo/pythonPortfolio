@@ -1,0 +1,37 @@
+body{
+	background-color: #FFFFFF;
+	font-family: arial;
+}
+
+a{color: black}
+h1{color:#D4308D;}
+h2{color:#6838BA;}
+h3{color:#8457D1;}
+.container{
+	display: inline-block;
+	width: 400px;
+	margin-left: 100px;
+}
+.same_line{
+	display: inline-block;
+}
+
+.container2{
+	display: inline-block;
+	width: 400px;
+	height: 400px;
+	margin-left: 100px;
+	vertical-align: top;
+	border: 2px solid #932FB6;
+	position: fixed;
+	overflow: scroll;
+}
+
+.header{
+	display: block;
+	margin-left: 350px;
+}
+
+.red{
+	color: red;
+}

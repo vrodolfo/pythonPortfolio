@@ -1,0 +1,16 @@
+body{
+	background-color: white;
+}
+
+.red{
+	color: red;
+}
+
+.yes{
+	background-color: red;
+	color: white;
+}
+
+.test{
+	display: inline-block;
+}

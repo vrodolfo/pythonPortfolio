@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add Book Review</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+	<div class="container">
+		<a href="/books">Home</a>
+		<a href="/goback">Logout</a>
+		<h1>Add a New Book Title and a Review</h1>
+			{% if messages %}
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }} red"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+			{% endif %}
+		<form action="/addBook" method="post">
+			{% csrf_token %}
+			<table>
+				<tr>
+					<td><h3>Book title:</h3></td>
+					<td><input type="text" name="book"></td>
+				</tr>
+				
+				<tr>
+					<td><h3>Author: </h3></td>
+				</tr>
+				<tr>
+					<td><h4>Choose from the list:</h4></td>
+					<td>
+						<select name="author" id="author">
+								<option value="">--Select an option--</option>
+							{% for i in authors %}
+								<option value="{{i.name}}">{{i.name}}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><h4>or add a new author</h4></td>
+					<td><input type="text" name="newAuthor"></td>
+				</tr>
+				
+				<tr>
+					<td><h3>Review:</h3></td>
+					<td><textarea name="review" id="review" cols="30" rows="5"></textarea></td>
+				</tr>
+				<tr>
+					<td><h3 class="same_line">Rating:</h3></td>
+					<td>
+						<select  class="same_line" name="rating" id="rating">
+							<option value="">--Select an option--</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Add book and review"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

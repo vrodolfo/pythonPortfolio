@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<title>Login and Registration</title>
+	<!-- Boostrap Core -->
+	<link rel="stylesheet" href="{% static '../static/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static '../static/style.css' %}">
+</head>
+<body>
+	<div class="header">
+		<a href="/books/add">Add Book and Review</a>
+		<a href="/goback">Logout</a>
+		<h1>Welcome, {{request.session.first_name}}</h1>
+	</div>
+	<div class="container">
+			<h2>Recent Book Reviews</h2>
+			{% for i in topReviews %}
+				<h3><a href="/books/{{i.book.id}}">Title:{{i.book.title}}</a></h3>
+				{% for z in i.reviews %}
+					<h3>Rating: {{z.rating}}</h3>
+					<h3><a href="/user/{{z.reviewed_by.id}}">{{z.reviewed_by.first_name}}</a> says: {{z.review}}</h3>
+					<h3>Posted on {{z.created_at}}</h3>
+				{% endfor %}
+			{% endfor %}
+	</div>
+	<div class="container2">
+		<h2>Other Books with reviews:</h2>
+		{% for i in rest %}
+			<h3><a href="/books/{{i.book.id}}">{{i.book.title}}</a></h3>
+		{% endfor %}
+	</div>
+</body>
+</html>

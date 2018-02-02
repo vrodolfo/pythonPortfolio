@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<title>Courses</title>
+	<!-- Boostrap Core -->
+	<link rel="stylesheet" href="{% static '../static/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static '../static/style.css' %}">
+</head>
+<body>
+
+	<div class="container">
+		<h1>Are you sure you want to delete the following course?</h1>
+		<h3>Name: {{course.name}}</h3>
+		<h3>Description: {{course.desc}}</h3>
+		<form class="test" action="/" method="post">
+			{% csrf_token %}
+			<input type="submit" value="No">
+		</form>
+		<form class="test" action="/courses/{{course.id}}/destroy" method="post">
+			{% csrf_token %}
+			<input class="yes" type="submit" value="Yes! I want to delete this">
+		</form>
+	</div>
+</body>
+</html>

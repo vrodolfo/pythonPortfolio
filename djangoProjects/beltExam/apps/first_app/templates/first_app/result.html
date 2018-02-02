@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<title>Travel Buddy</title>
+	<!-- Boostrap Core -->
+
+	<link rel="stylesheet" href="{% static '../static/style.css' %}">
+</head>
+<body>
+	<div class="header">
+		<a href="/goback">Logout</a>
+		<h1>Welcome, {{request.session.first_name}}</h1>
+	</div>
+	<div class="container">
+			
+			<h2>Your Trip Schedules</h2>
+			<table>
+				<thead>
+					<tr>
+						<td>Destination</td>
+						<td>Travel Start Date</td>
+						<td>Travel End Date</td>
+						<td>Plan</td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for i in myTrips %}
+						<tr>
+							<td><a href="destination/{{i.id}}">{{i.destination}}</a></td>
+							<td>{{i.date_from}}</td>
+							<td>{{i.date_to}}</td>
+							<td>{{i.description}}</td>
+						</tr>
+					{% endfor %}
+					{% for i in joining_trips %}
+						<tr>
+							<td><a href="destination/{{i.id}}">{{i.destination}}</a></td>
+							<td>{{i.date_from}}</td>
+							<td>{{i.date_to}}</td>
+							<td>{{i.description}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+
+			</table>
+	</div>
+
+	<div class="container">
+			<h2>Other User's Travel Plans</h2>
+			<table>
+				<thead>
+					<tr>
+						<td>Name</td>
+						<td>Destination</td>
+						<td>Travel Start Date</td>
+						<td>Travel End Date</td>
+						<td>Do you wan to join?</td>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for i in filtered %}
+						<tr>
+							<td>{{i.user_trip.first_name}}</td>
+							<td><a href="destination/{{i.id}}">{{i.destination}}</a></td>
+							<td>{{i.date_from}}</td>
+							<td>{{i.date_to}}</td>
+							<td><a href="/join/{{i.id}}">Join</a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+
+			</table>
+	</div>
+	<div class="container">
+		<h3><a href="/addTrip">Add Travel Plan</a></h3>
+	</div>
+
+</body>
+</html>

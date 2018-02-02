@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Travel Buddy</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+	<div class="header">
+		<a href="/travels">Home</a>
+		<a href="/goback">Logout</a>
+		<h1>Welcome, {{request.session.first_name}}</h1>
+	</div>
+	<h1>Add a Trip</h1>
+		{% if messages %}
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }} red"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+		{% endif %}
+	<form action="/add/" method="post">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<td>Destination:</td>
+				<td><input type="text" name="destination" value="{{destination}}"></td>
+			</tr>
+			<tr>
+				<td>Description:</td>
+				<td><input type="text" name="description" value="{{description}}"></td>
+			</tr>
+			<tr>
+				<td>Travel Date From:</td>
+				<td><input type="date" name="date_from" min="2017-11-21" value="{{date}}" required></td>
+			</tr>
+			<tr>
+				<td>Travel Date To:</td>
+				<td><input type="date" name="date_to"  min="2017-11-21" value="{{date}}" required></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Add"></td>
+			</tr>
+		</table>
+
+	</form>
+	
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reviews</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+	<div class="header">
+		<a href="/books">Home</a>
+		<a href="/goback">Logout</a>
+	</div>
+	
+	<div class="container">
+		<h1>BOOK</h1>
+		<h2>Book id : {{book_id}}</h2>
+		<input type="hidden" value="{{book_id}}" name="book_id">
+		<h2>book_title : {{book_title}}</h2>
+		<h2>book_author : {{book_author}}</h2>
+
+		<h1>Reviews</h1>
+		{% for i in reviews %}
+			
+			
+			<h3>Rating: {{i.rating}}</h3>
+			<h3><a href="/user/{{i.reviewed_by.id}}">{{i.reviewed_by.first_name}}</a> says: {{i.review}}</h3>
+			<h3>Posted on {{i.created_at}}</h3>
+			{% if request.session.user_id == i.reviewed_by.id %}
+				<form action="/destroyComment/" method="post">
+					{% csrf_token %}
+					<input type="hidden" value="{{book_id}}" name="book_id">
+					<input type="hidden" name="review_id" value="{{i.id}}">
+					<input type="submit" value="Delete">
+				</form>
+			{% endif %}
+			<h3>**********</h3>
+
+
+		{% endfor %}
+	</div>
+
+	<div class="container2">
+			{% if messages %}
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }} red"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+			{% endif %}
+		<form action="/addReview/" method="post">
+			{% csrf_token %}
+			<h2>Add a Review</h2>
+			<textarea name="review" id="" cols="30" rows="10"></textarea>
+			<h4>Rating</h4>
+			<select name="rating" id="rating">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+			<input type="hidden" name="book_id" value="{{book_id}}">
+			<input type="submit" value="Add a review">
+
+		</form>
+	</div>
+</body>
+</html>

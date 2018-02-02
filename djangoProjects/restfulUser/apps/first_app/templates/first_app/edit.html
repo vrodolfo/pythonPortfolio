@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% load static %}
+	<meta charset="UTF-8">
+	<title>Semi-Restful Users</title>
+	<!-- Boostrap Core -->
+	<link rel="stylesheet" href="{% static '../static/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static '../static/style.css' %}">
+</head>
+<body>
+	<div class="container">
+		<form action="/users/{{user.id}}" method="post">
+			{% csrf_token %}
+			<h1>Edit - User: {{user.id}}</h1>
+			<h2>First Name: <input type="text" name="first_name" value="{{user.first_name}}"></h2>
+			<h2>Last  Name: <input type="text" name="last_name" value="{{user.last_name}}"></h2>
+			<h2>Email:      <input type="text" name="email_address" value="{{user.email_address}}"></h2>
+			<input type="submit" value="Update">
+		</form>
+		<a href="/users/{{user.id}}">Show</a>|
+		<a href="/GoBack">GoBack</a>
+	</div>
+	
+</body>
+</html>
